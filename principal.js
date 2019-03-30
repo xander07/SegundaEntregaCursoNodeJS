@@ -1,5 +1,3 @@
-const express = require('express');
-const app = express();
 const curso = require('./Curso');
 const {argv} = require('./yargs');
 
