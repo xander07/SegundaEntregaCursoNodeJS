@@ -9,6 +9,7 @@
   "author": "Jhon Jairo Serna Cordoba (Cordoba-Js)",
   "license": "ISC",
   "dependencies": {
+    "argv": "0.0.2",
     "express": "^4.16.4",
     "yargs": "^13.2.2"
   }
