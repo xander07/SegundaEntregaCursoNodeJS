@@ -5,7 +5,7 @@ cursos = [];
 
 const listarCursos = () => {
     try {
-        cursos = require('./cursos.json');
+        cursos = require('../cursos.json');
     } catch (error) {
         cursos = []
     }
@@ -20,7 +20,7 @@ const guardarCurso = () => {
 }
 
 
-hbs.registerHelper('crearCurso',(id,nombre,descripcion,precio,modalidad = '',intensidad = '',estado = 'Disponible') => {
+hbs.registerHelper('crearCurso', (id, nombre, descripcion, precio, modalidad = '', intensidad = '', estado = 'Disponible') => {
     listarCursos();
     let nCurso = {
         id: id,
@@ -31,7 +31,8 @@ hbs.registerHelper('crearCurso',(id,nombre,descripcion,precio,modalidad = '',int
         intensidad: intensidad,
         estado: estado
     };
-    let duplicado = cursos.find(cur => cur.id == curso.id);
+     console.log(nCurso);
+    let duplicado = cursos.find(cur => cur.id == nCurso.id);
     if (!duplicado) {
         cursos.push(nCurso);
         guardarCurso();
@@ -39,3 +40,38 @@ hbs.registerHelper('crearCurso',(id,nombre,descripcion,precio,modalidad = '',int
         console.log("El id ya pertenece a un curso");
     }
 });
+
+hbs.registerHelper('listar', () => {
+    listaCursos = require('../cursos.json');
+    let cursos = listaCursos.filter(cur => cur.estado == 'Disponible');
+    if (cursos.length > 0) {
+        let texto = "<table>\
+                <thead>\
+                <th>ID</th>\
+                <th>Nombre</th>\
+                <th>Descripcion</th>\
+                <th>Precio</th>\
+                <th>Modalidad</th>\
+                <th>Intensidad Horaria </th>\
+                <thead>\
+                <tbody>";
+
+        cursos.forEach(curso => {
+            texto = texto +
+                '<tr>' +
+                '<td>' + curso.id + '</td>' +
+                '<td>' + curso.nombre + '</td>' +
+                '<td>' + curso.descripcion + '</td>' +
+                '<td>' + curso.precio + '</td>' +
+                '<td>' + curso.modalidad + '</td>' +
+                '<td>' + curso.intensidad + '</td>';
+
+        });
+
+        texto = texto + '</tbody></table>';
+        return texto;
+    } else {
+        texto = '<h1> NO HAY CURSOS DISPONIBLES </h1>';
+        return texto;
+    }
+})
