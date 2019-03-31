@@ -36,8 +36,11 @@ hbs.registerHelper('crearCurso', (id, nombre, descripcion, precio, modalidad = '
     if (!duplicado) {
         cursos.push(nCurso);
         guardarCurso();
+        let texto = '<h1>Fue creado con éxito</h1>';
+        return texto;
     } else {
-        console.log("El id ya pertenece a un curso");
+        let texto = '<h1>El id ya pertenece a un curso</h1>';
+        return texto;
     }
 });
 
@@ -53,7 +56,7 @@ hbs.registerHelper('listar', () => {
                 <th>Precio</th>\
                 <th>Modalidad</th>\
                 <th>Intensidad Horaria </th>\
-                <thead>\
+                </thead>\
                 <tbody>";
 
         cursos.forEach(curso => {
@@ -74,4 +77,51 @@ hbs.registerHelper('listar', () => {
         texto = '<h1> NO HAY CURSOS DISPONIBLES </h1>';
         return texto;
     }
+});
+
+hbs.registerHelper('listarInscritos', () => {
+    listaAspirantes = require('../inscritos.json');
+    listaCursos = require('../cursos.json');
+    if(listaAspirantes.length == 0){
+        let texto = '<h1> No hay inscritos en ningun curso </h1>';
+        return texto;
+    } else {
+        let texto = "<form action='/eliminarAsp' method='POST'>\
+                    <table>\
+                    <thead>\
+                    <th> Nombre del curso</th>\
+                    <th> Nombre del aspirante</th>\
+                    <th> Documento del aspirante</th>\
+                    <th> Correo del aspirante</th>\
+                    <th> Telefono del aspirante</th>\
+                    </thead>\
+                    <tbody>";
+
+        listaCursos.forEach(curso =>{
+            let aspirante = listaAspirantes.filter(as => as.id == curso.id);
+            if(!aspirante){
+                texto = texto + '<h2> No hay aspirantes en este curso';
+                return texto;
+            } else {
+                aspirante.forEach(asp => {
+                    texto = texto +
+                    '<tr>' +
+                    '<td>' + curso.nombre + '</td>' +
+                    '<td>' + asp.nombre + '</td>' +
+                    '<td name="doc">' + asp.docIdentidad + '</td>' +
+                    '<td>' + asp.correo + '</td>' +
+                    '<td>' + asp.telefono + '</td>' +
+                    '<td><button class="submit" name="id"' + 'value=' + curso.id + '>Eliminar</button></td>';
+                });
+            }
+        });
+
+        texto = texto + '</tbody></table></form>';
+        return texto;
+    }
+});
+
+hbs.registerHelper('eliminarAsp',(id,doc) => {
+    console.log(id);
+    console.log(doc);
 })

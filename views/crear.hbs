@@ -2,14 +2,14 @@
 <p>Crear un curso</p>
 <main class="main">
     <div class="formulario">
-        <form action="/crear_curso" method="POST">
+        <form action="/crearCurso" method="POST">
         <div>
             <label>ID del curso</label>
             <input type="number" name="id" required>
         </div>
         <div>
             <label>Nombre del curso</label>
-            <input type="text" name="nonbre" required>
+            <input type="text" name="nombre" required>
         </div>
         <div>
             <label>Descripcion</label>
@@ -22,6 +22,7 @@
         <div>
             <label>Modalidad</label>
             <select name="modalidad">
+                <option></option>
                 <option>Presencial</option>
                 <option>Virtual</option>
             </select>
@@ -34,5 +35,4 @@
         </form>
     </div>
 </main>
-{{{crearCurso}}}
 {{>footer}}

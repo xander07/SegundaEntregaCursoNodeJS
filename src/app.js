@@ -21,20 +21,32 @@ app.get('/crear_curso',(req,res) => {
     res.render('crear');
 });
 
-app.post('/crear_curso',(req,res) => {
-    res.render('crear',{
+app.post('/crearCurso',(req,res) => {
+    res.render('creado',{
         id: parseInt(req.body.id),
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
         precio: parseInt(req.body.precio),
         modalidad: req.body.modalidad,
-        intensidad: parseInt(req.body.intensidad)
+        intensidad: parseInt(req.body.intensidad),
+        estado: "Disponible"
+    });
+});
+
+app.post('/eliminarAsp',(req,res) => {
+    res.render('eliminarAsp',{
+        id: parseInt(req.body.id),
+        doc: parseInt(req.body.doc)
     });
 });
 
 app.get('/verCursos',(req,res) => {
     res.render('ver');
 });
+
+app.get('/VerInscritos', (req,res) => {
+    res.render('verInscritos');
+})
 
 app.listen(3000, () => {
 
