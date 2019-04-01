@@ -48,17 +48,23 @@ app.get('/VerInscritos', (req, res) => {
     res.render('verInscritos');
 });
 
-app.get('inscribirCurso', (req, res) => {
+app.get('/inscribirCurso', (req, res) => {
     res.render('inscribirCurso.hbs');
 });
 
-app.post('inscribir', (req, res) => {
+app.post('/inscribir', (req, res) => {
     res.render('inscribir', {
         name: req.body.name,
         documento: req.body.doc,
         nombre: req.body.nombre,
         email: req.body.email,
         telefono: req.body.telefono
+    });
+});
+
+app.post('/actualizar', (req,res) => {
+    res.render('actualizar', {
+        id: req.body.id
     });
 });
 
