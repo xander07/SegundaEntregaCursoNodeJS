@@ -1,38 +1,42 @@
 {{>header}}
-<p>Crear un curso</p>
+
+<h2>Crear un curso</h2>
+
 <main class="main">
-    <div class="formulario">
-        <form action="/crearCurso" method="POST">
-        <div>
-            <label>ID del curso</label>
-            <input type="number" name="id" required>
+    <form action="/crearCurso" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+            <label for="inputId">Id Curso</label>
+            <input type="numeric" class="form-control" name="id" id="inputId" placeholder="Id Curso" required>
+            </div>
+            <div class="form-group col-md-6">
+            <label for="inputNombreCurso">Nombre Curso</label>
+            <input type="text" class="form-control" name="nombre" id="inputNombreCurso" placeholder="Nombre Curso" required>
+            </div>
         </div>
-        <div>
-            <label>Nombre del curso</label>
-            <input type="text" name="nombre" required>
+        <div class="form-group">
+            <label for="inputDescripción">Descripción del Curso</label>
+            <input type="text" class="form-control" name="descripción" id="inputAddress" placeholder="Descripción" required>
         </div>
-        <div>
-            <label>Descripcion</label>
-            <input type="text" name="descripcion" required>
+        <div class="form-group">
+            <label for="inputPrecio">Precio de Curso</label>
+            <input type="numeric" class="form-control" name="precio" id="inputPrecio" placeholder="700000" required>
         </div>
-        <div>
-            <label>Precio</label>
-            <input type="number" name="precio" required>
-        </div>
-        <div>
-            <label>Modalidad</label>
-            <select name="modalidad">
-                <option></option>
-                <option>Presencial</option>
+        <div class="form-row">
+            <label for="inputModalidad">Modalidad</label>
+            <select id="inputModalidad" class="form-control" name="modalidad">
+                <option selected></option>
                 <option>Virtual</option>
+                <option>Presencial</option>
             </select>
+            </div>
+            <div class="form-group col-md-2">
+            <label for="inputIntensidad">Intensidad Horaria</label>
+            <input type="numeric" class="form-control" id="inputIntensidad" name="intensidad" placeholder="N° total de horas del curso">
+            </div>
         </div>
-        <div>
-            <label>Intensidad horaria</label>
-            <input type="number" name="intensidad">
-        </div>
-        <button>Crear</button>
-        </form>
-    </div>
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </form>
+
 </main>
 {{>footer}}
