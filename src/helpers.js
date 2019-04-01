@@ -176,7 +176,7 @@ hbs.registerHelper('listarInscritos', () => {
                         '<td><label for="doc">' + asp.docIdentidad + '</label></td>' +
                         '<td>' + asp.correo + '</td>' +
                         '<td>' + asp.telefono + '</td>' +
-                        '<td><button class="submit" name="id"' + 'value=' + curso.id + '>Eliminar</button></td>';
+                        '<td><button class="submit" name="id"' + 'value="' + curso.id + '-'+ asp.docIdentidad + '">Eliminar</button></td>';
                 });
             }
         });
@@ -186,10 +186,27 @@ hbs.registerHelper('listarInscritos', () => {
     }
 });
 
-hbs.registerHelper('eliminarAsp', (id, doc) => {
-    console.log(id);
-    console.log(doc);
-    return "<h1>Esta funcionalidad aún no está implementada</h1>";
+hbs.registerHelper('eliminarAsp', (id) => {
+    var id1 = id;
+    control = id1.split('-');
+    let id2 = control[0];
+    let doc = control[1];
+    listarInscritos();
+    let curso1 = inscritos.find(cur => cur.id == id2);
+    if(curso1){
+        let asp = inscritos.find(aux => aux.docIdentidad == doc);
+        if(asp){
+            var i = inscritos.indexOf(asp);
+            inscritos.splice(i,1);
+            guardarInscrito();
+        } else {
+            console.log("El documento ingresado no pertenece a un aspirante de este curso");
+        }
+    } else {
+        console.log("No hay un curso con este id");
+    }
+    
+    return '<h1>Eliminado con éxito</h1>';
 });
 
 hbs.registerHelper('inscribir', (name, documento, nombre, email, telefono) => {
