@@ -75,28 +75,33 @@ hbs.registerHelper('listar', () => {
     listaCursos = require('../cursos.json');
     let cursos = listaCursos.filter(cur => cur.estado == 'Disponible');
     if (cursos.length > 0) {
+        let i = 1;
         let texto = "<form action='/actualizar' method='POST'>\
-                <table>\
+                <table class='table table-striped'>\
                 <thead>\
-                <th>ID</th>\
-                <th>Nombre</th>\
-                <th>Descripcion</th>\
-                <th>Precio</th>\
-                <th>Modalidad</th>\
-                <th>Intensidad Horaria </th>\
+                    <tr>\
+                        <th scope='col'>#</th>\
+                        <th scope='col'>ID</th>\
+                        <th scope='col'>Nombre</th>\
+                        <th scope='col'>Descripcion</th>\
+                        <th scope='col'>Precio</th>\
+                        <th scope='col'>Modalidad</th>\
+                        <th scope='col'>Intensidad Horaria</th>\
+                    </tr>\
                 </thead>\
                 <tbody>";
 
         cursos.forEach(curso => {
             texto = texto +
                 '<tr>' +
+                '<th scope="row">'+ i +'</th>'+
                 '<td>' + curso.id + '</td>' +
                 '<td>' + curso.nombre + '</td>' +
                 '<td>' + curso.descripcion + '</td>' +
                 '<td>' + curso.precio + '</td>' +
                 '<td>' + curso.modalidad + '</td>' +
                 '<td>' + curso.intensidad + '</td>';
-
+                i = i+1;
         });
 
         texto = texto + '</tbody></table></form>';
@@ -111,21 +116,26 @@ hbs.registerHelper('listar1', () => {
     listaCursos = require('../cursos.json');
     let cursos = listaCursos.filter(cur => cur.estado == 'Disponible');
     if (cursos.length > 0) {
+        let i = 1;
         let texto = "<form action='/actualizar' method='POST'>\
-                <table>\
+                <table class='table table-striped'>\
                 <thead>\
-                <th>ID</th>\
-                <th>Nombre</th>\
-                <th>Descripcion</th>\
-                <th>Precio</th>\
-                <th>Modalidad</th>\
-                <th>Intensidad Horaria </th>\
+                    <tr>\
+                        <th scope='col'>#</th>\
+                        <th scope='col>ID</th>\
+                        <th scope='col>Nombre</th>\
+                        <th scope='col>Descripcion</th>\
+                        <th scope='col>Precio</th>\
+                        <th scope='col>Modalidad</th>\
+                        <th scope='col>Intensidad Horaria </th>\
+                    </tr>\
                 </thead>\
                 <tbody>";
 
         cursos.forEach(curso => {
             texto = texto +
                 '<tr>' +
+                '<th scope="row">'+ i +'</th>'+
                 '<td>' + curso.id + '</td>' +
                 '<td>' + curso.nombre + '</td>' +
                 '<td>' + curso.descripcion + '</td>' +
@@ -133,7 +143,7 @@ hbs.registerHelper('listar1', () => {
                 '<td>' + curso.modalidad + '</td>' +
                 '<td>' + curso.intensidad + '</td>' +
                 '<td><button class="submit" name="id" value ="' + curso.id +'">Actualizar</button></td></tr>';
-
+                i = i+1;
         });
 
         texto = texto + '</tbody></table></form>';
@@ -152,31 +162,36 @@ hbs.registerHelper('listarInscritos', () => {
         return texto;
     } else {
         let texto = "<form action='/eliminarAsp' method='POST'>\
-                    <table>\
-                    <thead>\
-                    <th> Nombre del curso</th>\
-                    <th> Nombre del aspirante</th>\
-                    <th> Documento del aspirante</th>\
-                    <th> Correo del aspirante</th>\
-                    <th> Telefono del aspirante</th>\
+                    <table class='table table-striped'>\
+                        <thead>\
+                            <tr>\
+                                <th scope='col'>#</th>\
+                                <th scope='col'> Nombre del curso</th>\
+                                <th scope='col'> Nombre del aspirante</th>\
+                                <th scope='col'> Documento del aspirante</th>\
+                                <th scope='col'> Correo del aspirante</th>\
+                                <th scope='col'> Telefono del aspirante</th>\
+                            </tr>\
                     </thead>\
                     <tbody>";
-
         listaCursos.forEach(curso => {
             let aspirante = listaAspirantes.filter(as => as.id == curso.id);
             if (!aspirante) {
                 texto = texto + '<h2> No hay aspirantes en este curso';
                 return texto;
             } else {
+                let i = 1;
                 aspirante.forEach(asp => {
                     texto = texto +
-                        '<tr>' +
-                        '<td>' + curso.nombre + '</td>' +
-                        '<td>' + asp.nombre + '</td>' +
-                        '<td><label for="doc">' + asp.docIdentidad + '</label></td>' +
-                        '<td>' + asp.correo + '</td>' +
-                        '<td>' + asp.telefono + '</td>' +
-                        '<td><button class="submit" name="id"' + 'value=' + curso.id + '>Eliminar</button></td>';
+                    '<tr>' +
+                    '<th scope="row">'+ i +'</th>'+
+                    '<td>' + curso.nombre + '</td>' +
+                    '<td>' + asp.nombre + '</td>' +
+                    '<td><label for="doc">' + asp.docIdentidad + '</label></td>' +
+                    '<td>' + asp.correo + '</td>' +
+                    '<td>' + asp.telefono + '</td>' +
+                    '<td><button class="submit" name="id"' + 'value=' + curso.id + '>Eliminar</button></td>';
+                    i = i + 1;
                 });
             }
         });
