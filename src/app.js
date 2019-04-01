@@ -53,13 +53,13 @@ app.get('inscribirCurso', (req, res) => {
 });
 
 app.post('inscribir', (req, res) => {
-    res.render('inscribir' {
+    res.render('inscribir', {
         name: req.body.name,
         documento: req.body.doc,
         nombre: req.body.nombre,
         email: req.body.email,
         telefono: req.body.telefono
-    }
+    });
 });
 
 app.listen(3000, () => {
