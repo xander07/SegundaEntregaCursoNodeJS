@@ -41,8 +41,7 @@ app.post('/crearCurso', (req, res) => {
 
 app.post('/eliminarAsp', (req, res) => {
     res.render('eliminarAsp', {
-        id: parseInt(req.body.id),
-        doc: parseInt(req.body.doc)
+        id: req.body.id
     });
 });
 
