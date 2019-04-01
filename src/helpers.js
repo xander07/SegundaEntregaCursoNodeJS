@@ -2,6 +2,7 @@ const hbs = require('hbs');
 const fs = require('fs');
 
 cursos = [];
+inscritos = [];
 
 const listarCursos = () => {
     try {
@@ -11,8 +12,24 @@ const listarCursos = () => {
     }
 }
 
+const listarInscritos = () => {
+    try {
+        inscritos = require('../inscritos.json');
+    } catch (error) {
+        inscritos = []
+    }
+}
+
 const guardarCurso = () => {
     let datos = JSON.stringify(cursos);
+    fs.writeFile('cursos.json', datos, (err) => {
+        if (err) throw (err);
+        console.log('Archivo creado con éxito');
+    });
+}
+
+const guardarInscrito = () => {
+    let datos = JSON.stringify(inscritos);
     fs.writeFile('cursos.json', datos, (err) => {
         if (err) throw (err);
         console.log('Archivo creado con éxito');
@@ -42,6 +59,16 @@ hbs.registerHelper('crearCurso', (id, nombre, descripcion, precio, modalidad = '
         let texto = '<h1>El id ya pertenece a un curso</h1>';
         return texto;
     }
+});
+
+hbs.registerHelper('listarC',() => {
+    listarCursos=require('../cursos.json');
+    let texto = '<option></option>';
+    listarCursos.forEach(cur => {
+        texto = texto +
+                '<option>' + cur.nombre + '</option>';
+    });
+    return texto;
 });
 
 hbs.registerHelper('listar', () => {
@@ -108,7 +135,7 @@ hbs.registerHelper('listarInscritos', () => {
                     '<tr>' +
                     '<td>' + curso.nombre + '</td>' +
                     '<td>' + asp.nombre + '</td>' +
-                    '<td name="doc">' + asp.docIdentidad + '</td>' +
+                    '<td><label for="doc">' + asp.docIdentidad + '</label></td>' +
                     '<td>' + asp.correo + '</td>' +
                     '<td>' + asp.telefono + '</td>' +
                     '<td><button class="submit" name="id"' + 'value=' + curso.id + '>Eliminar</button></td>';

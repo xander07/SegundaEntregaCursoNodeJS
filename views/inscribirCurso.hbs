@@ -1,0 +1,34 @@
+{{>header}}
+<p>Inscribirse en un curso</p>
+<main class="main">
+    <div class="formulario">
+        <form action="/inscribir" method="POST">
+        <div>
+            <label>Nombre del curso</label>
+            <select name="name" required>
+            {{{listarC}}}
+            </select>
+        </div>
+        <div>
+            <label>Documento del aspirante</label>
+            <input type="text" name="doc" required>
+        </div>
+        <div>
+            <label>Nombre del aspirante</label>
+            <input type="text" name="nombre" required>
+        </div>
+        <div>
+            <label>Correo del aspirante</label>
+            <input type="number" name="email" required>
+        </div>
+        <div>
+            <label>Telefono del aspirante</label>
+            <input type="number" name = "telefono">
+        </div>
+        <button>Crear</button>
+        </form>
+    </div>
+</main>
+
+
+{{>footer}}
