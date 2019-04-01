@@ -5,7 +5,7 @@
         <form action="/inscribir" method="POST">
         <div>
             <label>Nombre del curso</label>
-            <select name="name" required>
+            <select name="name">
             {{{listarC}}}
             </select>
         </div>
@@ -19,16 +19,14 @@
         </div>
         <div>
             <label>Correo del aspirante</label>
-            <input type="number" name="email" required>
+            <input type="email" name="email" required>
         </div>
         <div>
             <label>Telefono del aspirante</label>
-            <input type="number" name = "telefono">
+            <input type="number" name = "telefono" required>
         </div>
         <button>Crear</button>
         </form>
     </div>
 </main>
-
-
 {{>footer}}
