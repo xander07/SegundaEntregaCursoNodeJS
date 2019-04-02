@@ -73,6 +73,10 @@ app.post('/actualizar', (req,res) => {
     });
 });
 
+app.get('*', (req ,res) => {
+    res.render('error');
+});
+
 app.listen(3000, () => {
 
     console.log("escuchando en el puerto 3000");
