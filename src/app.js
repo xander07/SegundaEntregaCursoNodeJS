@@ -5,6 +5,8 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 require('./helpers');
 
+const port = process.env.PORT || 3000;
+
 const dirNode_modules = path.join(__dirname , '../node_modules')
 const directoriopublico = path.join(__dirname, '../public');
 const directoriopartials = path.join(__dirname, '../partials');
@@ -77,7 +79,7 @@ app.get('*', (req ,res) => {
     res.render('error');
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
 
-    console.log("escuchando en el puerto 3000");
+    console.log('servidor en el puerto' + port);
 }); 
